@@ -40,13 +40,21 @@ require_once '../routes/routes.php';
 // Create the redirect instance
 $redirect = new Redirector(new UrlGenerator($router->getRoutes(), $request));
 
-// Dispatch the request through the router
-$response = $router->dispatch($request);
+try {
+    //We look for the routes in the project and select the right one
+    $response = $router->dispatch($request);
+    // We send the response.
+    $response->send();
+} catch (Exception $e) {
+    //In case an excepcion is thrown we send a 500 response indicating something went wrong.
+    header("HTTP/1.1 500 Internal Server Error");
+    //We kill the process
+    echo json_encode(["message" => "Something went wrong"]);
+    die();
+}
 
-// Send the response back to the browser
-$response->send();
-
-function cors() {
+function cors()
+{
     /**
      * The Cross-Source Resource Exchange (CORS) is a mechanism
      * that uses additional HTTP headers to allow a user agent to obtain
