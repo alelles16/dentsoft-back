@@ -3,6 +3,9 @@
         "psr-4": {"App\\": "app/"}
     },
     "require": {
-        "illuminate/database": "^5.7"
+        "illuminate/database": "^5.7",
+        "illuminate/routing": "^5.7",
+        "vlucas/phpdotenv": "^2.5",
+        "illuminate/events": "^5.7"
     }
 }
