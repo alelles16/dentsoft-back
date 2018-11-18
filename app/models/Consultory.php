@@ -4,9 +4,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 
-class Consultory extends Model
-{
+class Consultory extends Model {
     protected $table = 'consultories';
+    protected $fillable = ['name','address', 'telephone', 'users_id'];
 
     /**
      * Get the user that owns the consultory.
@@ -18,8 +18,7 @@ class Consultory extends Model
     /**
      * The dentists that belong to the consultory.
      */
-    public function dentists()
-    {
+    public function dentists() {
         return $this->belongsToMany(
             'App\Models\Dentist',
             'consultories_dentists',
@@ -31,8 +30,7 @@ class Consultory extends Model
     /**
      * The patients that belong to the consultory.
      */
-    public function patients()
-    {
+    public function patients() {
         return $this->belongsToMany(
             'App\Models\Patient',
             'consultories_patients',

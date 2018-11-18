@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Controllers;
+
+use App\Models\Consultory;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -12,7 +14,7 @@ class UsersController {
         /**
          * This function obtain token from the URL and find a user with the given token
          */
-        if($request->token) {
+        if ($request->token) {
             $this->user = User::where('token', $request->token)->first();
         }
     }
@@ -39,13 +41,19 @@ class UsersController {
          * and return a Json with the information
          * about new user
          */
-        $user = new User();
-        $user->name = $request->name;
-        $user->lastname = $request->lastname;
-        $user->email = $request->email;
-        $user->password = password_hash($request->password, PASSWORD_DEFAULT);
-        $user->mobile = $request->mobile;
-        $user->save();
+        $user = User::create([
+            'name' => $request->name,
+            'lastname' => $request->lastname,
+            'email' => $request->email,
+            'password' => password_hash($request->password, PASSWORD_DEFAULT),
+            'mobile' => $request->mobile,
+        ]);
+        $consultory = Consultory::create([
+            'name' => $request->consultory['name'],
+            'address' => $request->consultory['address'],
+            'telephone' => $request->consultory['telephone'],
+            'users_id' => $user->id,
+        ]);
         return $user->toJson();
     }
 
@@ -54,7 +62,7 @@ class UsersController {
          * This function update a specific user
          * and return a Json with the new information
          */
-        if(!$this->user || $this->user->id !== $id){
+        if (!$this->user || $this->user->id !== $id) {
             return "{'message': 'You are not allowed to perform this action.'}";
         }
         $user = User::findOrFail($id);
@@ -73,5 +81,3 @@ class UsersController {
         return $user->delete();
     }
 }
-
-?>

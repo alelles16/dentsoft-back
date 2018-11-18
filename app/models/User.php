@@ -4,9 +4,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 
-class User extends Model
-{
+class User extends Model {
     protected $table = 'users';
+    protected $fillable = ['email', 'password', 'mobile', 'lastname', 'name'];
 
     /**
      * Get the consultory associated with the user.

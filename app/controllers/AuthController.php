@@ -5,11 +5,9 @@ namespace App\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 
-class AuthController
-{
+class AuthController {
 
-    public function login(Request $request)
-    {
+    public function login(Request $request) {
         /**
          * This function validate if the user exists and his password is correct
          * If two fields are correct then generate a Token to validate the user
@@ -27,8 +25,7 @@ class AuthController
         return "{\"error\": \"User dont exist.\"}";
     }
 
-    public function generateToken()
-    {
+    public function generateToken() {
         $length = 50;
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $charactersLength = strlen($characters);
@@ -37,5 +34,15 @@ class AuthController
             $randomString .= $characters[rand(0, $charactersLength - 1)];
         }
         return $randomString;
+    }
+
+    public function me(Request $request) {
+        try {
+            $user = User::where('token', $request->token)->first();
+            return $user->toJson();
+        } catch (Exception $error) {
+            header('HTTP/1.0 403 Forbidden');
+            return "{\"error\": \"User not allowed.\"}";
+        }
     }
 }

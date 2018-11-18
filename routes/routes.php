@@ -34,4 +34,5 @@ $router->group(['namespace' => 'App\Controllers'], function (Router $router) {
 
     // Routes for authentication
     $router->post('/login', ['name' => 'login', 'uses' => 'AuthController@login']);
+    $router->get('/me', ['name' => 'me', 'uses' => 'AuthController@me']);
 });

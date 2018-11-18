@@ -53,8 +53,7 @@ try {
     die();
 }
 
-function cors()
-{
+function cors() {
     /**
      * The Cross-Source Resource Exchange (CORS) is a mechanism
      * that uses additional HTTP headers to allow a user agent to obtain
