@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Controllers;
+
+use App\Models\Consultory;
 use App\Models\Patient;
 use Illuminate\Http\Request;
 
@@ -12,7 +14,7 @@ class PatientsController {
         /**
          * This function obtain token from the URL and find a user with the given token
          */
-        if($request->token) {
+        if ($request->token) {
             $this->user = User::where('token', $request->token)->first();
         }
     }
@@ -33,12 +35,20 @@ class PatientsController {
         return $patient->toJson();
     }
 
+    public function show_list_patients($id) {
+        $patients = Patient::whereHas('consultories', function ($query) use ($id) {
+            $query->where('consultories.id', $id);
+        })->get();
+        return $patients;
+    }
+
     public function store(Request $request) {
         /**
          * This function create a new patient
          * and return a Json with the information
          * about new patient
          */
+        $consultory = Consultory::findOrFail($request->consultory_id);
         $patient = new Patient();
         $patient->name = $request->name;
         $patient->lastname = $request->lastname;
@@ -50,6 +60,9 @@ class PatientsController {
         $patient->telephone = $request->telephone;
         $patient->mobile = $request->mobile;
         $patient->save();
+        if ($patient->save()) {
+            $patient->consultories()->attach($consultory->id);
+        }
         return $patient->toJson();
     }
 
@@ -81,5 +94,3 @@ class PatientsController {
     }
 
 }
-
-?>

@@ -33,6 +33,16 @@ class ConsultoriesController {
         return $consultory->toJson();
     }
 
+    public function show_consultory_user($id) {
+        try {
+            $consultory = Consultory::where('users_id', $id)->first();
+            return $consultory->toJson();
+        } catch (Exception $error) {
+            header('HTTP/1.0 403 Forbidden');
+            return "{\"error\": \"Consultory not allowed.\"}";
+        }
+    }
+
     public function store(Request $request) {
         /**
          * This function create a new consultory

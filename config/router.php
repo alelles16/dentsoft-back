@@ -40,7 +40,12 @@ require_once '../routes/routes.php';
 // Create the redirect instance
 $redirect = new Redirector(new UrlGenerator($router->getRoutes(), $request));
 
-try {
+//We look for the routes in the project and select the right one
+$response = $router->dispatch($request);
+// We send the response.
+$response->send();
+
+/* try {
     //We look for the routes in the project and select the right one
     $response = $router->dispatch($request);
     // We send the response.
@@ -51,7 +56,7 @@ try {
     //We kill the process
     echo json_encode(["message" => "Something went wrong"]);
     die();
-}
+} */
 
 function cors() {
     /**

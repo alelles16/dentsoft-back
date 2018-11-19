@@ -4,15 +4,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 
-class Patient extends Model
-{
+class Patient extends Model {
     protected $table = 'patients';
+    protected $fillable = ['name', 'lastname', 'age', 'gender', 'identification',
+    'placeofbirth', 'birthdate', 'telephone', 'mobile'];
 
     /**
      * The consultories that belong to the patient.
      */
-    public function consultories()
-    {
+    public function consultories() {
         return $this->belongsToMany(
             'App\Models\Consultory',
             'consultories_patients',

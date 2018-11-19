@@ -48,6 +48,22 @@ class UsersController {
             'password' => password_hash($request->password, PASSWORD_DEFAULT),
             'mobile' => $request->mobile,
         ]);
+        return $user->toJson();
+    }
+
+    public function store_user_consultory(Request $request) {
+        /**
+         * This function create a new user and a consultory
+         * and return a Json with the information
+         * about new user and his consultory
+         */
+        $user = User::create([
+            'name' => $request->name,
+            'lastname' => $request->lastname,
+            'email' => $request->email,
+            'password' => password_hash($request->password, PASSWORD_DEFAULT),
+            'mobile' => $request->mobile,
+        ]);
         $consultory = Consultory::create([
             'name' => $request->consultory['name'],
             'address' => $request->consultory['address'],
