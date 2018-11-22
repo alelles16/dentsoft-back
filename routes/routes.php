@@ -29,13 +29,15 @@ $router->group(['namespace' => 'App\Controllers'], function (Router $router) {
     $router->delete('/patient/{id}', ['name' => 'patients.delete', 'uses' => 'PatientsController@delete']);
 
     // Routes for dentists
-    $router->get('/dentist', ['name' => 'dentists.index', 'uses' => 'DentientsController@index']);
-    $router->get('/dentient/{id}', ['name' => 'dentists.show', 'uses' => 'DentientsController@show']);
-    $router->post('/dentient', ['name' => 'dentists.store', 'uses' => 'DentientsController@store']);
-    $router->put('/dentient/{id}', ['name' => 'dentists.update', 'uses' => 'DentientsController@update']);
-    $router->delete('/dentient/{id}', ['name' => 'dentists.delete', 'uses' => 'DentientsController@delete']);
+    $router->get('/dentist', ['name' => 'dentists.index', 'uses' => 'DentistsController@index']);
+    $router->get('/dentist/{id}', ['name' => 'dentists.show', 'uses' => 'DentistsController@show']);
+    $router->get('/dentists_consultory/{id}', ['name' => 'dentists.show_list_dentists', 'uses' => 'DentistsController@show_list_dentists']);
+    $router->post('/dentist', ['name' => 'dentists.store', 'uses' => 'DentistsController@store']);
+    $router->put('/dentist/{id}', ['name' => 'dentists.update', 'uses' => 'DentistsController@update']);
+    $router->delete('/dentist/{id}', ['name' => 'dentists.delete', 'uses' => 'DentistsController@delete']);
 
     // Routes for authentication
     $router->post('/login', ['name' => 'login', 'uses' => 'AuthController@login']);
+    $router->post('/logout', ['name' => 'logout', 'uses' => 'AuthController@logout']);
     $router->get('/me', ['name' => 'me', 'uses' => 'AuthController@me']);
 });

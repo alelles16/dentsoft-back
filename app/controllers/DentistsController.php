@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 use App\Models\Dentist;
+use App\Models\Consultory;
 use Illuminate\Http\Request;
 
 class DentistsController {
@@ -33,18 +34,29 @@ class DentistsController {
         return $dentist->toJson();
     }
 
+    public function show_list_dentists($id) {
+        $dentists = Dentist::whereHas('consultories', function ($query) use ($id) {
+            $query->where('consultories.id', $id);
+        })->get();
+        return $dentists;
+    }
+
     public function store(Request $request) {
         /**
          * This function create a new dentist
          * and return a Json with the information
          * about new dentist
          */
+        $consultory = Consultory::findOrFail($request->consultory_id);
         $dentist = new Dentist();
         $dentist->name = $request->name;
         $dentist->lastname = $request->lastname;
         $dentist->mobile = $request->mobile;
         $dentist->save();
-        return $patient->toJson();
+        if ($dentist->save()) {
+            $dentist->consultories()->attach($consultory->id);
+        }
+        return $dentist->toJson();
     }
 
     public function update(Request $request, $id) {
@@ -57,15 +69,15 @@ class DentistsController {
         $dentist->lastname = $request->lastname ?? $dentist->lastname;
         $dentist->mobile = $request->mobile ?? $dentist->mobile;
         $dentist->save();
-        return $patient->toJson();
+        return $dentist->toJson();
     }
 
-    public function delete($request, $id) {
+    public function delete($id) {
         /**
          * This funtion delete a specific dentist
          */
         $dentist = Dentist::findOrFail($id);
-        return $dentist->delete();
+        return "{\"msg\": ".$dentist->delete()."}";
     }
 
 }

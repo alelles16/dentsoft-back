@@ -36,6 +36,16 @@ class AuthController {
         return $randomString;
     }
 
+    public function logout(Request $request) {
+        $user = User::where('token', $request->token)->first();
+        $user->token = null;
+        if ($user->save()) {
+            return "{\"msg\": \"Success\"}";
+        } else {
+            return "{\"msg\": \"Error\"}";
+        }
+    }
+
     public function me(Request $request) {
         try {
             $user = User::where('token', $request->token)->first();

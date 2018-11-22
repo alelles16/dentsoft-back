@@ -90,7 +90,7 @@ class PatientsController {
          * This funtion delete a specific patient
          */
         $patient = Patient::findOrFail($id);
-        return $patient->delete();
+        return "{\"msg\": ".$patient->delete()."}";
     }
 
 }
