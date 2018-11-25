@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Models\Consultory;
 use App\Models\Patient;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class PatientsController {
