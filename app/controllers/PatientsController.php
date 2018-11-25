@@ -59,7 +59,6 @@ class PatientsController {
         $patient->birthdate = $request->birthdate;
         $patient->telephone = $request->telephone;
         $patient->mobile = $request->mobile;
-        $patient->save();
         if ($patient->save()) {
             $patient->consultories()->attach($consultory->id);
         }

@@ -52,7 +52,6 @@ class DentistsController {
         $dentist->name = $request->name;
         $dentist->lastname = $request->lastname;
         $dentist->mobile = $request->mobile;
-        $dentist->save();
         if ($dentist->save()) {
             $dentist->consultories()->attach($consultory->id);
         }

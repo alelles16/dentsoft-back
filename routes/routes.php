@@ -40,4 +40,7 @@ $router->group(['namespace' => 'App\Controllers'], function (Router $router) {
     $router->post('/login', ['name' => 'login', 'uses' => 'AuthController@login']);
     $router->post('/logout', ['name' => 'logout', 'uses' => 'AuthController@logout']);
     $router->get('/me', ['name' => 'me', 'uses' => 'AuthController@me']);
+
+    //Routes for medical history
+    $router->post('/history', ['name' => 'history.create', 'uses' => 'HistoryController@store']);
 });

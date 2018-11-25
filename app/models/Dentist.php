@@ -19,4 +19,8 @@ class Dentist extends Model
             'consultories_id'
         );
     }
+
+    public function histories(){
+        return $this->hasMany('App\Models\History');
+    }
 }
