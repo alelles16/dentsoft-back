@@ -28,7 +28,7 @@ class HistoryController {
         /**
          * This function return a dentists list
          */
-        $histories = History::all();
+        $histories = History::with('dentist', 'patient')->get();
         return $histories->toJson();
     }
 

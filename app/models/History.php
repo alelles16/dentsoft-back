@@ -9,10 +9,10 @@ class History extends Model {
     protected $fillable = ['dentist_id', 'patient_id', 'questions', 'intraOral'];
     
     public function dentist(){
-        return $this->belongsTo('App\Models\Dentist');
+        return $this->belongsTo('App\Models\Dentist', 'dentists_id');
     }
 
     public function patient(){
-        return $this->belongsTo('App\Models\Patient');
+        return $this->belongsTo('App\Models\Patient', 'patients_id');
     }
 }
