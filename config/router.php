@@ -40,12 +40,12 @@ require_once '../routes/routes.php';
 // Create the redirect instance
 $redirect = new Redirector(new UrlGenerator($router->getRoutes(), $request));
 
-//We look for the routes in the project and select the right one
-$response = $router->dispatch($request);
-// We send the response.
-$response->send();
+// //We look for the routes in the project and select the right one
+// $response = $router->dispatch($request);
+// // We send the response.
+// $response->send();
 
-/* try {
+try {
     //We look for the routes in the project and select the right one
     $response = $router->dispatch($request);
     // We send the response.
@@ -54,9 +54,9 @@ $response->send();
     //In case an excepcion is thrown we send a 500 response indicating something went wrong.
     header("HTTP/1.1 500 Internal Server Error");
     //We kill the process
-    echo json_encode(["message" => "Something went wrong"]);
+    echo json_encode(["message" => $e->getMessage()]);
     die();
-} */
+} 
 
 function cors() {
     /**

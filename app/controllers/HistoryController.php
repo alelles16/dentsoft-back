@@ -21,6 +21,9 @@ class HistoryController {
     }
 
     public function index() {
+        if (!$this->user) {
+            throw new \Exception('You are not allowed to perform this action.');
+        }
         /**
          * This function return a dentists list
          */
@@ -29,6 +32,9 @@ class HistoryController {
     }
 
     public function show($id) {
+        if (!$this->user) {
+            throw new \Exception('You are not allowed to perform this action.');
+        }
         /**
          * This function return a specific dentist
          */
@@ -44,6 +50,9 @@ class HistoryController {
     // }
 
     public function store(Request $request) {
+        if (!$this->user) {
+            throw new \Exception('You are not allowed to perform this action.');
+        }
         /**
          * This function create a new dentist
          * and return a Json with the information

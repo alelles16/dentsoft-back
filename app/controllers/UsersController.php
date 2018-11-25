@@ -20,6 +20,9 @@ class UsersController {
     }
 
     public function index() {
+        if (!$this->user) {
+            throw new \Exception('You are not allowed to perform this action.');
+        }
         /**
          * This function return a users list
          */
@@ -28,6 +31,9 @@ class UsersController {
     }
 
     public function show($id) {
+        if (!$this->user) {
+            throw new \Exception('You are not allowed to perform this action.');
+        }
         /**
          * This function return a specific user
          */
@@ -36,6 +42,9 @@ class UsersController {
     }
 
     public function store(Request $request) {
+        if (!$this->user) {
+            throw new \Exception('You are not allowed to perform this action.');
+        }
         /**
          * This function create a new user
          * and return a Json with the information
@@ -74,6 +83,9 @@ class UsersController {
     }
 
     public function update(Request $request, $id) {
+        if (!$this->user) {
+            throw new \Exception('You are not allowed to perform this action.');
+        }
         /**
          * This function update a specific user
          * and return a Json with the new information

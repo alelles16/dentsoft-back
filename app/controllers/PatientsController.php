@@ -20,6 +20,9 @@ class PatientsController {
     }
 
     public function index() {
+        if (!$this->user) {
+            throw new \Exception('You are not allowed to perform this action.');
+        }
         /**
          * This function return a patients list
          */
@@ -28,6 +31,9 @@ class PatientsController {
     }
 
     public function show($id) {
+        if (!$this->user) {
+            throw new \Exception('You are not allowed to perform this action.');
+        }
         /**
          * This function return a specific patient
          */
@@ -36,6 +42,9 @@ class PatientsController {
     }
 
     public function show_list_patients($id) {
+        if (!$this->user) {
+            throw new \Exception('You are not allowed to perform this action.');
+        }
         $patients = Patient::whereHas('consultories', function ($query) use ($id) {
             $query->where('consultories.id', $id);
         })->get();
@@ -43,6 +52,9 @@ class PatientsController {
     }
 
     public function store(Request $request) {
+        if (!$this->user) {
+            throw new \Exception('You are not allowed to perform this action.');
+        }
         /**
          * This function create a new patient
          * and return a Json with the information
@@ -66,6 +78,9 @@ class PatientsController {
     }
 
     public function update(Request $request, $id) {
+        if (!$this->user) {
+            throw new \Exception('You are not allowed to perform this action.');
+        }
         /**
          * This function update a specific patient
          * and return a Json with the new information
@@ -85,6 +100,9 @@ class PatientsController {
     }
 
     public function delete($id) {
+        if (!$this->user) {
+            throw new \Exception('You are not allowed to perform this action.');
+        }
         /**
          * This funtion delete a specific patient
          */

@@ -3,6 +3,7 @@
 namespace App\Controllers;
 use App\Models\Dentist;
 use App\Models\Consultory;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class DentistsController {
@@ -19,6 +20,9 @@ class DentistsController {
     }
 
     public function index() {
+        if (!$this->user) {
+            throw new \Exception('You are not allowed to perform this action.');
+        }
         /**
          * This function return a dentists list
          */
@@ -27,6 +31,9 @@ class DentistsController {
     }
 
     public function show($id) {
+        if (!$this->user) {
+            throw new \Exception('You are not allowed to perform this action.');
+        }
         /**
          * This function return a specific dentist
          */
@@ -35,6 +42,9 @@ class DentistsController {
     }
 
     public function show_list_dentists($id) {
+        if (!$this->user) {
+            throw new \Exception('You are not allowed to perform this action.');
+        }
         $dentists = Dentist::whereHas('consultories', function ($query) use ($id) {
             $query->where('consultories.id', $id);
         })->get();
@@ -42,6 +52,9 @@ class DentistsController {
     }
 
     public function store(Request $request) {
+        if (!$this->user) {
+            throw new \Exception('You are not allowed to perform this action.');
+        }
         /**
          * This function create a new dentist
          * and return a Json with the information
@@ -59,6 +72,9 @@ class DentistsController {
     }
 
     public function update(Request $request, $id) {
+        if (!$this->user) {
+            throw new \Exception('You are not allowed to perform this action.');
+        }
         /**
          * This function update a specific dentist
          * and return a Json with the new information
@@ -72,6 +88,9 @@ class DentistsController {
     }
 
     public function delete($id) {
+        if (!$this->user) {
+            throw new \Exception('You are not allowed to perform this action.');
+        }
         /**
          * This funtion delete a specific dentist
          */

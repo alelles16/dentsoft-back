@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 use App\Models\Consultory;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ConsultoriesController {
@@ -18,6 +19,10 @@ class ConsultoriesController {
     }
 
     public function index() {
+        if (!$this->user) {
+            throw new \Exception('You are not allowed to perform this action.');
+        }
+
         /**
          * This function return a consultories list
          */
@@ -26,6 +31,10 @@ class ConsultoriesController {
     }
 
     public function show($id) {
+        if (!$this->user) {
+            throw new \Exception('You are not allowed to perform this action.');
+        }
+
         /**
          * This function return a specific consultory
          */
@@ -34,6 +43,10 @@ class ConsultoriesController {
     }
 
     public function show_consultory_user($id) {
+        if (!$this->user) {
+            throw new \Exception('You are not allowed to perform this action.');
+        }
+
         try {
             $consultory = Consultory::where('users_id', $id)->first();
             return $consultory->toJson();
@@ -44,6 +57,9 @@ class ConsultoriesController {
     }
 
     public function store(Request $request) {
+        if (!$this->user) {
+            throw new \Exception('You are not allowed to perform this action.');
+        }
         /**
          * This function create a new consultory
          * and return a Json with the information
@@ -59,6 +75,9 @@ class ConsultoriesController {
     }
 
     public function update(Request $request, $id) {
+        if (!$this->user) {
+            throw new \Exception('You are not allowed to perform this action.');
+        }
         /**
          * This function update a specific consultory
          * and return a Json with the new information
@@ -72,6 +91,9 @@ class ConsultoriesController {
     }
 
     public function delete($id) {
+        if (!$this->user) {
+            throw new \Exception('You are not allowed to perform this action.');
+        }
         /**
          * This funtion delete a specific consultory
          */
