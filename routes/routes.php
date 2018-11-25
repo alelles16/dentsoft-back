@@ -43,4 +43,7 @@ $router->group(['namespace' => 'App\Controllers'], function (Router $router) {
 
     //Routes for medical history
     $router->post('/history', ['name' => 'history.create', 'uses' => 'HistoryController@store']);
+    $router->get('/histories', ['name' => 'history.create', 'uses' => 'HistoryController@index']);
+    $router->get('/user/{id}/histories', ['name' => 'history.user', 'uses' => 'HistoryController@history_user']);
+
 });

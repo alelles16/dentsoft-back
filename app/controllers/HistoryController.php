@@ -68,26 +68,13 @@ class HistoryController {
         return $history->toJson();
     }
 
-    // public function update(Request $request, $id) {
-    //     /**
-    //      * This function update a specific dentist
-    //      * and return a Json with the new information
-    //      */
-    //     $dentist = Dentist::findOrFail($id);
-    //     $dentist->name = $request->name ?? $dentist->name;
-    //     $dentist->lastname = $request->lastname ?? $dentist->lastname;
-    //     $dentist->mobile = $request->mobile ?? $dentist->mobile;
-    //     $dentist->save();
-    //     return $dentist->toJson();
-    // }
-
-    // public function delete($id) {
-    //     /**
-    //      * This funtion delete a specific dentist
-    //      */
-    //     $dentist = Dentist::findOrFail($id);
-    //     return "{\"msg\": ".$dentist->delete()."}";
-    // }
+    public function history_user($id){
+        if (!$this->user) {
+            throw new \Exception('You are not allowed to perform this action.');
+        }
+        $histories = History::where('user_id', $id)->get();
+        return $histories->toJson();
+    }
 
 }
 
