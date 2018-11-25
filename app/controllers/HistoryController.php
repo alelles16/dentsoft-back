@@ -4,6 +4,7 @@ namespace App\Controllers;
 use App\Models\Dentist;
 use App\Models\History;
 use App\Models\Patient;
+use App\Models\User;
 use App\Models\Consultory;
 use Illuminate\Http\Request;
 
