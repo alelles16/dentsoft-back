@@ -3,6 +3,8 @@
 namespace App\Controllers;
 use App\Models\Consultory;
 use App\Models\User;
+use App\Models\Patient;
+use App\Models\History;
 use Illuminate\Http\Request;
 
 class ConsultoriesController {
@@ -99,6 +101,19 @@ class ConsultoriesController {
          */
         $consultory = Consultory::findOrFail($id);
         return $consultory->delete();
+    }
+
+    public function statistics($id){
+        $consultory = Consultory::find($id);
+        $histories = History::whereHas('patient.consultories', function ($query) use ($id) {
+            $query->where('consultories.id', $id);
+        })->get();
+
+        return [
+            'patients' => $consultory->patients->count(),
+            'dentists' => $consultory->dentists->count(),
+            'histories' => $histories->count()
+        ];
     }
 
 }

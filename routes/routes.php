@@ -19,6 +19,7 @@ $router->group(['namespace' => 'App\Controllers'], function (Router $router) {
     $router->post('/consultory', ['name' => 'consultories.store', 'uses' => 'ConsultoriesController@store']);
     $router->put('/consultory/{id}', ['name' => 'consultories.update', 'uses' => 'ConsultoriesController@update']);
     $router->delete('/consultory/{id}', ['name' => 'consultories.delete', 'uses' => 'ConsultoriesController@delete']);
+    $router->get('/consultory/{id}/statistics', ['name'=>'consultories.statistics', 'uses'=>'ConsultoriesController@statistics']);
 
     // Routes for patients
     $router->get('/patients', ['name' => 'patients.index', 'uses' => 'PatientsController@index']);

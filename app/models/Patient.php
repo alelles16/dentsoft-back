@@ -22,6 +22,6 @@ class Patient extends Model {
     }
 
     public function histories(){
-        return $this->hasMany('App\Models\History');
+        return $this->hasMany('App\Models\History', 'patients_id');
     }
 }
