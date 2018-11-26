@@ -5,6 +5,7 @@ use App\Models\Consultory;
 use App\Models\User;
 use App\Models\Patient;
 use App\Models\History;
+use App\Models\Dentist;
 use Illuminate\Http\Request;
 
 class ConsultoriesController {
@@ -109,9 +110,17 @@ class ConsultoriesController {
             $query->where('consultories.id', $id);
         })->get();
 
+        $patients = Patient::whereHas('consultories', function ($query) use ($id) {
+            $query->where('consultories.id', $id);
+        })->get();
+
+        $dentists = Dentist::whereHas('consultories', function ($query) use ($id) {
+            $query->where('consultories.id', $id);
+        })->get();
+
         return [
-            'patients' => $consultory->patients->count(),
-            'dentists' => $consultory->dentists->count(),
+            'patients' => $patients->count(),
+            'dentists' => $dentists->count(),
             'histories' => $histories->count()
         ];
     }
