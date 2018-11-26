@@ -73,7 +73,7 @@ class HistoryController {
         if (!$this->user) {
             throw new \Exception('You are not allowed to perform this action.');
         }
-        $histories = History::where('user_id', $id)->get();
+        $histories = History::where('patients_id', $id)->with('dentist', 'patient')->get();
         return $histories->toJson();
     }
 

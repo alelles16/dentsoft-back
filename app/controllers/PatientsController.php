@@ -46,6 +46,7 @@ class PatientsController {
         if (!$this->user) {
             throw new \Exception('You are not allowed to perform this action.');
         }
+        
         $patients = Patient::whereHas('consultories', function ($query) use ($id) {
             $query->where('consultories.id', $id);
         })->get();
